@@ -106,7 +106,11 @@ p {
 .row {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap; // Permet aux éléments de se placer sur plusieurs lignes si nécessaire
+  width: 100%; // Assure que le conteneur prend toute la largeur disponible
+  box-sizing: border-box; // Inclut les bordures et le padding dans la largeur totale
 }
+
 .col {
   display: flex;
   flex-direction: column;
