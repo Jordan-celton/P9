@@ -10,7 +10,7 @@ const Slider = () => {
 
   // Tri des événements par date décroissante
   const byDateDesc = data?.focus?.sort(
-    (evtA, evtB) => new Date(evtA.date) - new Date(evtB.date)
+    (evtA, evtB) => new Date(evtB.date) - new Date(evtA.date)
   );
 
   const nextCard = () => {
