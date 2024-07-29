@@ -14,16 +14,21 @@ import { useData } from "../../contexts/DataContext";
 import "./style.scss";
 
 const Page = () => {
+  // Utilisation du hook useData pour récupérer les données
   const { data } = useData();
+
+  // Définir un état local pour stocker l'événement le plus récent
   const [latestEvent, setLatestEvent] = useState(null);
 
+  // Utilisation du hook useEffect pour effectuer une action après le rendu
   useEffect(() => {
+    // Vérifier si les données existent et contiennent des événements
     if (data && data.events && data.events.length > 0) {
       // Trier les événements par date décroissante
       const sortedEvents = [...data.events].sort(
         (a, b) => new Date(b.date) - new Date(a.date)
       );
-      // Sélectionner le plus récent
+      // Sélectionner le plus récent et mettre à jour l'état
       setLatestEvent(sortedEvents[0]);
     }
   }, [data]);
