@@ -14,21 +14,14 @@ import { useData } from "../../contexts/DataContext";
 import "./style.scss";
 
 const Page = () => {
-  // Utilisation du hook useData pour récupérer les données
   const { data } = useData();
-
-  // Définir un état local pour stocker l'événement le plus récent
   const [latestEvent, setLatestEvent] = useState(null);
 
-  // Utilisation du hook useEffect pour effectuer une action après le rendu
   useEffect(() => {
-    // Vérifier si les données existent et contiennent des événements
     if (data && data.events && data.events.length > 0) {
-      // Trier les événements par date décroissante
       const sortedEvents = [...data.events].sort(
         (a, b) => new Date(b.date) - new Date(a.date)
       );
-      // Sélectionner le plus récent et mettre à jour l'état
       setLatestEvent(sortedEvents[0]);
     }
   }, [data]);
@@ -39,21 +32,27 @@ const Page = () => {
         <Menu />
       </header>
       <main>
-        <section className="SliderContainer">
+        <section className="SliderContainer" data-testid="slider-container">
           <Slider />
         </section>
-        <section className="ServicesContainer">
+        <section className="ServicesContainer" data-testid="services-container">
           <h2 className="Title">Nos services</h2>
           <p>Nous organisons des événements sur mesure partout dans le monde</p>
           <div className="ListContainer">
-            <ServiceCard imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png">
+            <ServiceCard
+              imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png"
+              data-testid="service-card-1"
+            >
               <h3>Soirée d’entreprise</h3>
               Une soirée d’entreprise vous permet de réunir vos équipes pour un
               moment convivial afin de valoriser votre société en projetant une
               image dynamique. Nous vous proposons d’organiser pour vous vos
               diners et soirée d’entreprise
             </ServiceCard>
-            <ServiceCard imageSrc="/images/hall-expo.png">
+            <ServiceCard
+              imageSrc="/images/hall-expo.png"
+              data-testid="service-card-2"
+            >
               <h3>Conférences</h3>
               724 events vous propose d’organiser votre évènement, quelle que
               soit sa taille, en s’adaptant à votre demande et à vos demandes.
@@ -61,7 +60,10 @@ const Page = () => {
               le lieu parfait ainsi que des solutions inédites pour capter votre
               audience et faire de cet évènement un succès
             </ServiceCard>
-            <ServiceCard imageSrc="/images/sophia-sideri-LFXMtUuAKK8-unsplash1.png">
+            <ServiceCard
+              imageSrc="/images/sophia-sideri-LFXMtUuAKK8-unsplash1.png"
+              data-testid="service-card-3"
+            >
               <h3>Experience digitale</h3>
               Notre agence experte en contenus immersifs offre des services de
               conseil aux entreprises, pour l’utilisation de la réalité
@@ -71,11 +73,11 @@ const Page = () => {
             </ServiceCard>
           </div>
         </section>
-        <section className="EventsContainer">
+        <section className="EventsContainer" data-testid="events-list">
           <h2 className="Title">Nos réalisations</h2>
           <EventList />
         </section>
-        <section className="PeoplesContainer">
+        <section className="PeoplesContainer" data-testid="people-list">
           <h2 className="Title">Notre équipe</h2>
           <p>Une équipe d’experts dédiés à l’organisation de vos événements</p>
           <div className="ListContainer">
@@ -111,7 +113,7 @@ const Page = () => {
             />
           </div>
         </section>
-        <div className="FormContainer" id="contact">
+        <div className="FormContainer" id="contact" data-testid="contact-form">
           <h2 className="Title">Contact</h2>
           <Modal
             Content={
@@ -130,8 +132,8 @@ const Page = () => {
           </Modal>
         </div>
       </main>
-      <footer className="row">
-        <div className="col presta">
+      <footer className="row" data-testid="footer">
+        <div className="col presta" data-testid="last-event-card">
           <h3>Notre dernière prestation</h3>
           {latestEvent ? (
             <EventCard
@@ -140,6 +142,7 @@ const Page = () => {
               date={new Date(latestEvent.date)}
               label="boom"
               small
+              data-testid="latest-event-card"
             />
           ) : (
             <p>Aucun événement récent.</p>
